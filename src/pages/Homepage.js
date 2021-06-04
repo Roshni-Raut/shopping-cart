@@ -1,16 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Button } from 'rsuite'
+import data from '../data/categories.json'
+import './Homepage.style.css'
 
 const Homepage = () => {
+    
     return (
         <div>
-            homepage
-            <button value="category" type="submit">
-            <Link to="/category">category</Link>
-            </button>
-            <button value="cart" type="submit">
-            <Link to="/cart">cart</Link>
-            </button>
+            <span >
+                <Link to="/cart">cart</Link>
+            </span>
+            <p>homepage</p>
+            {
+                data.map((val)=>
+                <Button key={val.id}>
+                    <Link key={val.id} to={`/Category/${val.id}`}>{val.name}</Link>
+                </Button>)
+            }
         </div>
     )
 }

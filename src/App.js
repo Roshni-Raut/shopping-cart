@@ -6,17 +6,20 @@ import Homepage from './pages/Homepage';
 
 function App() {
   return (
+    <>
     <Switch>
-      <Route path="/">
+      <Route exact path="/">
         <Homepage/>
       </Route>
-      <Route exact path="/category" >
+      <Route exact path="/category/:catId" >
         <Category/>
       </Route>
-      <Route exact path="/Cart">
-        <Cart/>
+      <Route exact path="/cart">
+        <Cart />
       </Route>
+      <Route> This is 404 page </Route>
     </Switch>
+    </>
   );
 }
 
