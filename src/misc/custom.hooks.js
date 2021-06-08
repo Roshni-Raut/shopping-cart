@@ -1,14 +1,21 @@
+/* eslint-disable no-param-reassign */
 import{useReducer,useEffect} from 'react'
-
-
 
 function reducer(prevState,action){
     switch(action.type){
         case 'ADD':{
-            return[...prevState,[action.pId , action.qty]]
+            return[...prevState,{id:action.pId , qty:action.qty, name:action.name,price:action.price}]
         }
         case 'REMOVE': {
-            return prevState.filter((pId)=>pId[0]!==action.pId)
+            return prevState.filter((prod)=>prod.id!==action.pId)
+        }
+        case 'INCR':{
+            return prevState.map((prod)=>{
+                if(prod.id===action.pId){
+                    prod.qty=1+prod.qty
+                }
+                return prod
+            })
         }
         default: return prevState
     }

@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'rsuite'
 import data from '../data/categories.json'
-import './Homepage.style.css'
 
 const Homepage = () => {
     
