@@ -1,23 +1,10 @@
 import React from 'react'
 import { Button } from 'rsuite'
-import { showCart } from '../../misc/custom.hooks'
 import IMAGE_NOT_FOUND from '../../image/not-found.png'
 import { ProductCard } from '../../pages/styled'
 
-export const ProductGrid = ({product}) => {
-    const [cart,dispatch]=showCart() 
+export const ProductGrid = ({product,addToCart}) => {
     const stock=product.inStock?'In stock':'Out of stock'
-
-    const addToCart=(e)=>{
-        const pid=e.target.value
-        const prod=cart.filter(p=>p.id===pid)
-        if(prod[0]){
-            dispatch({type:'INCR',pId:pid})
-        }
-        else{
-            dispatch({type:'ADD',pId:pid,qty:1,price:product.price,name:product.name})
-        }
-    }
 
     return (
         <ProductCard>

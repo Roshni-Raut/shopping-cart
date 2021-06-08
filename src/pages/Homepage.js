@@ -7,13 +7,10 @@ const Homepage = () => {
     
     return (
         <div>
-            <span >
-                <Link to="/cart">cart</Link>
-            </span>
-            <p>homepage</p>
+            <h1>homepage</h1>
             {
                 data.map((val)=>
-                <Button color="red" key={val.id}>
+                <Button color="red" block key={val.id}>
                     <Link key={val.id} to={`/Category/${val.id}`}>{val.name}</Link>
                 </Button>)
             }

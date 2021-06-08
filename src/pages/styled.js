@@ -72,3 +72,15 @@ export const StyledTable= styled.table`
         }
     }
 `
+export const Home=styled.span`
+    margin:20px;
+    background-color: silver;
+    display:inline;
+    padding: 8px;
+    border-radius:20px;
+    position:absolute;
+    top:0;
+    left:0;
+    text-decoration:none;
+    color:black;
+`

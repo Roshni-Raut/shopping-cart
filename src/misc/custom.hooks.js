@@ -1,3 +1,4 @@
+/* eslint-disable operator-assignment */
 /* eslint-disable no-param-reassign */
 import{useReducer,useEffect} from 'react'
 
@@ -17,12 +18,20 @@ function reducer(prevState,action){
                 return prod
             })
         }
+        case 'DECR':{
+            return prevState.map((prod)=>{
+                if(prod.id===action.pId){
+                    prod.qty=prod.qty-1
+                }
+                return prod
+            })
+        }
         default: return prevState
     }
 }
 
 function usePersistedReducer(initialState,key){
-    
+  
     const [state,dispatch]=useReducer(reducer,initialState,(initial)=>{
         const persisted =localStorage.getItem(key);
         return persisted?JSON.parse(persisted):initial;
@@ -31,7 +40,6 @@ function usePersistedReducer(initialState,key){
     useEffect(()=>{
         localStorage.setItem(key,JSON.stringify(state))
     },[state,key])
-    
     return [state,dispatch]
 }
 
@@ -39,6 +47,7 @@ export function showCart(key='products'){
     /* eslint-disable react-hooks/rules-of-hooks */
     return usePersistedReducer([],key)
 }
+
 
 export function useSession(value="",key="category"){
     const catId=sessionStorage.getItem(key)
