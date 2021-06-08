@@ -4,7 +4,7 @@ import{useReducer,useEffect} from 'react'
 function reducer(prevState,action){
     switch(action.type){
         case 'ADD':{
-            return[...prevState,{id:action.pId , qty:action.qty, name:action.name,price:action.price}]
+            return[...prevState,{id:action.pId , qty:action.qty}]
         }
         case 'REMOVE': {
             return prevState.filter((prod)=>prod.id!==action.pId)
@@ -38,4 +38,11 @@ function usePersistedReducer(initialState,key){
 export function showCart(key='products'){
     /* eslint-disable react-hooks/rules-of-hooks */
     return usePersistedReducer([],key)
+}
+
+export function useSession(value="",key="category"){
+    const catId=sessionStorage.getItem(key)
+    if(value!=="")
+        sessionStorage.setItem(key,value)
+    return catId
 }

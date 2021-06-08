@@ -1,28 +1,15 @@
-import React,{useEffect,useState} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { showCart } from '../misc/custom.hooks'
+import { useTotal } from '../misc/cartBtn.context'
 import {CartB} from './CardBtn.styled'
 
 const CardBtn = () => {
-    const [cart]=showCart()
-    const [qty,setQty]=useState(0)
-    const [total,setTotal]=useState(0)
-    
-    useEffect(()=>{
-        setQty(
-            cart.reduce((t,val)=>{
-                return t+val.qty
-            },0)
-        )
-        setTotal(
-            cart.reduce((t,val)=>{
-                return t+(val.price*val.qty)
-            },0)
-        )
-    },[cart])
+    const [qty,total]=useTotal()
+    console.log('qty:',qty)
+    console.log('total:',total)
     return (
         <CartB >
-            <Link to="/cart"><span className="circle">{qty}</span>:${total}</Link> 
+            <Link to="/cart" className="link"><span className="circle">{qty}</span> &nbsp; ${total}</Link> 
         </CartB>
     )
 }

@@ -2,15 +2,17 @@ import styled from 'styled-components'
 
 export const CartB= styled.div`
     margin:20px;
-    background-color: grey;
+    background-color: silver;
     display:inline;
     padding: 8px;
     border-radius:20px;
     position:absolute;
     top:0;
     right:0;
-    color:white;
-    text-decoration:none;
+    .link{
+        text-decoration:none;
+        color:black;
+    }
     .circle{
         color:black;
         background-color:white;

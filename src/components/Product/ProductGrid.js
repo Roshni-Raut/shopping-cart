@@ -6,7 +6,7 @@ import { ProductCard } from '../../pages/styled'
 
 export const ProductGrid = ({product}) => {
     const [cart,dispatch]=showCart() 
-    const stock=product.inStock?'in stock':'out of stock'
+    const stock=product.inStock?'In stock':'Out of stock'
 
     const addToCart=(e)=>{
         const pid=e.target.value
@@ -24,12 +24,14 @@ export const ProductGrid = ({product}) => {
             <div className="img-wrapper">
                 <img src={product.thumbnail} alt={IMAGE_NOT_FOUND} height="100" className="image"/>
             </div>
+            <div className="text-wrapper">
             <h1>{product.name}</h1>
-            <h1 >{product.price}</h1>
-            <h1 style={{color:product.inStock?'green':'red'}}>{stock}</h1>
+            <h2 >${product.price}.00</h2>
+            <h3 style={{color:product.inStock?'green':'red'}}>{stock}</h3>
             <Button key={product.id} value={product.id} onClick={addToCart}>
                 add to cart
             </Button>
+            </div>
         </ProductCard>
     )
 }

@@ -13,7 +13,7 @@ const Homepage = () => {
             <p>homepage</p>
             {
                 data.map((val)=>
-                <Button key={val.id}>
+                <Button color="red" key={val.id}>
                     <Link key={val.id} to={`/Category/${val.id}`}>{val.name}</Link>
                 </Button>)
             }
