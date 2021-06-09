@@ -8,6 +8,7 @@ const Homepage = () => {
     
     return (
         <HomePage>
+            {console.log('homepage render')}
             <h1>Homepage</h1>
             <h3>Categories:</h3>
             {

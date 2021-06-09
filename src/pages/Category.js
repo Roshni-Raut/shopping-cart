@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React,{useState,useEffect,useCallback} from 'react'
 import { Link, useParams} from 'react-router-dom'
 import Filter from '../components/Filter'
 import { ProductGrid } from '../components/Product/ProductGrid'
@@ -19,7 +20,7 @@ const Category = () => {
     const [total,setTotal]=useState(0)
     useSession(catId)
 
-    const addToCart=(e)=>{
+    const addToCart=useCallback((e)=>{
         const pid=e.target.value
         const prod=cart.filter(p=>p.id===pid)
         if(prod[0]){
@@ -28,41 +29,41 @@ const Category = () => {
         else{
             dispatch({type:'ADD',pId:pid,qty:1,price:product.price,name:product.name})
         }
-    }
-    const onFilter=(ev)=>{
+    })
+    const onFilter=useCallback((ev)=>{
+        console.log('check render')
         const val=ev.target.value
         if(filCon.includes(val)){
             setFilCon(filCon.filter(v=>v!==val))
         }else{
             setFilCon([...filCon,val])
         }
-    }
+    })
     useEffect(()=>{
-            switch(filCon.length){
-                case 1: setProduct( filCon[0]==="price" ? 
-                                        data.filter(d=> d.categoryId===catId && d.price<100):
-                                        data.filter(d=> d.categoryId===catId && d.inStock))
-                        break;
-                case 2: setProduct(data.filter(d=> d.categoryId===catId && d.price<100 && d.inStock))
-                        break;
-                default: setProduct(data.filter(d=> d.categoryId===catId))
-            }
-            setQty(
-                cart.reduce((t,val)=>{
-                    return t+val.qty
-                },0)
-            )
-            setTotal(
-                cart.reduce((t,val)=>{
-                    const p=Product(val.id)
-                    return t+(p.price*val.qty)
-                },0)
-            )
-                
+        switch(filCon.length){
+            case 1: setProduct( filCon[0]==="price" ? 
+                                    data.filter(d=> d.categoryId===catId && d.price<100):
+                                    data.filter(d=> d.categoryId===catId && d.inStock))
+                    break;
+            case 2: setProduct(data.filter(d=> d.categoryId===catId && d.price<100 && d.inStock))
+                    break;
+            default: setProduct(data.filter(d=> d.categoryId===catId))
+        }
+        setQty(
+            cart.reduce((t,val)=>{
+                return t+val.qty
+            },0)
+        )
+        setTotal(
+            cart.reduce((t,val)=>{
+                const p=Product(val.id)
+                return t+(p.price*val.qty)
+            },0)
+        )            
     },[filCon,catId,cart])
     return (
         <div>
-
+        {console.log('category render')}
         <CategoryPage>
             <Home><Link to="/" className="link">Home</Link></Home>
             <CartB >
@@ -71,7 +72,7 @@ const Category = () => {
             <h1 >{category[0].name}</h1>
             <h3 >{category[0].description}</h3>
         </CategoryPage>
-            <Filter onFilter={onFilter} />
+            <Filter onFilter={onFilter}/>
             <FlexGrid >
                 {product.length>0 && product.map(prod=> 
                         <ProductGrid

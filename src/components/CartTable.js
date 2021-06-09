@@ -8,6 +8,7 @@ const CartTable = ({prod,remove,incr,decr}) => {
     
     return (
             <tr key={product.id}>
+                {console.log('carttable render')}
             <td><img src={product.thumbnail} alt={IMAGE_NOT_FOUND}/></td>
             <td>{product.name }</td>
             <td><Button key={`incr${product.id}`} value={product.id} onClick={incr}className="de"> &#8593;</Button>

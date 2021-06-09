@@ -41,7 +41,6 @@ export const StyledTable= styled.table`
                 color:white;
             }
         }
-
         .r{
             color:white;
             background-color:red;   
@@ -93,11 +92,13 @@ export const CategoryPage=styled.div`
 `
 export const CartPage=styled.div`
     margin-top:20px;
-    h1,h3{
-        text-align: center;
-    }
     h1{
+        text-align: center;
         color: rgb(255, 102, 0);
+    }
+    h2{
+        text-align:center;
+        margin-top:120px;
     }
 `
 

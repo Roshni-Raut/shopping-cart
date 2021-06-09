@@ -8,6 +8,7 @@ export const ProductGrid = ({product,addToCart}) => {
 
     return (
         <ProductCard>
+            {console.log('productgrid render')}
             <div className="img-wrapper">
                 <img src={product.thumbnail} alt={IMAGE_NOT_FOUND} height="100" className="image"/>
             </div>

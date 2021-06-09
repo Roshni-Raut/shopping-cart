@@ -32,31 +32,34 @@ const Cart = () => {
                 const p=Product(val.id)
                 return t+(p.price*val.qty)
             },0)
-        )
+            )
     },[cart])
     return (
         <div>
+            {console.log('cart render')}
             <CartPage>
                 <Home>
                     <Link to={`/category/${catId}`} className="link">Back</Link>
                 </Home>
                 <CartBtn qty={qty} total={total}/>
                 <h1>Checkout</h1>
+                {cart.length===0 && <h2>Your cart is empty:<Link to={`/category/${catId}`} className="link"> click to go back</Link></h2>}
             </CartPage>
-            <StyledTable >
-                <tbody>
-                <tr id="head">
-                    <th>Product</th>
-                    <th>Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                    <th>Remove</th>
-                </tr>   
-                {
-                    cart.map((p,index)=><CartTable key={index} remove={remove} incr={incr} decr={decr} prod={p}/>)
-                }
-                </tbody>
-            </StyledTable>
+            {cart.length!==0 &&
+                <StyledTable >
+                    <tbody>
+                    <tr id="head">
+                        <th>Product</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Remove</th>
+                    </tr>   
+                        {cart.map((p,index)=>
+                            <CartTable key={index} remove={remove} incr={incr} decr={decr} prod={p}/>)}
+                    </tbody>
+                </StyledTable>
+            }
         </div>
     )
 }
