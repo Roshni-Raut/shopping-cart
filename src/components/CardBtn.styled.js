@@ -19,4 +19,7 @@ export const CartB= styled.div`
         border-radius:50%;
         padding:2px 7px 2px 7px ;
     }
+    &:hover{
+        box-shadow: 2px 2px 4px grey;
+    }
 `

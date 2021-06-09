@@ -21,7 +21,8 @@ function reducer(prevState,action){
         case 'DECR':{
             return prevState.map((prod)=>{
                 if(prod.id===action.pId){
-                    prod.qty=prod.qty-1
+                    if(prod.qty>1)
+                        prod.qty=prod.qty-1
                 }
                 return prod
             })

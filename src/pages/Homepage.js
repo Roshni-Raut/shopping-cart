@@ -2,19 +2,21 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from 'rsuite'
 import data from '../data/categories.json'
+import { HomePage } from './styled'
 
 const Homepage = () => {
     
     return (
-        <div>
-            <h1>homepage</h1>
+        <HomePage>
+            <h1>Homepage</h1>
+            <h3>Categories:</h3>
             {
                 data.map((val)=>
                 <Button color="red" block key={val.id}>
-                    <Link key={val.id} to={`/Category/${val.id}`}>{val.name}</Link>
+                    <Link key={val.id} to={`/Category/${val.id}`} className="link">{val.name}</Link>
                 </Button>)
             }
-        </div>
+        </HomePage>
     )
 }
 

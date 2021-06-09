@@ -4,7 +4,7 @@ import CartBtn from '../components/CartBtn'
 import CartTable from '../components/CartTable'
 import { showCart, useSession } from '../misc/custom.hooks'
 import { Product } from '../misc/helper'
-import { StyledTable } from './styled'
+import { CartPage, Home, StyledTable } from './styled'
 
 const Cart = () => {
     const [cart,dispatch]=showCart()
@@ -15,7 +15,12 @@ const Cart = () => {
     const remove=(e)=>{
         dispatch({type:'REMOVE',pId:e.target.value})
     }
-    
+    const decr=(e)=>{
+        dispatch({type:'DECR',pId:e.target.value})
+    }
+    const incr=(e)=>{
+        dispatch({type:'INCR',pId:e.target.value})
+    }
     useEffect(()=>{
         setQty(
             cart.reduce((t,val)=>{
@@ -31,21 +36,24 @@ const Cart = () => {
     },[cart])
     return (
         <div>
-            <CartBtn qty={qty} total={total}/>
-            Cart
-                <Link to={`/category/${catId}`}>Back</Link>
-            <p>Products</p>
+            <CartPage>
+                <Home>
+                    <Link to={`/category/${catId}`} className="link">Back</Link>
+                </Home>
+                <CartBtn qty={qty} total={total}/>
+                <h1>Checkout</h1>
+            </CartPage>
             <StyledTable >
                 <tbody>
-                <tr>
-                    <th>id</th>
-                    <th>name</th>
-                    <th>qty</th>
-                    <th>price</th>
-                    <th>remove</th>
+                <tr id="head">
+                    <th>Product</th>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Remove</th>
                 </tr>   
                 {
-                    cart.map(p=><CartTable key={p.id} remove={remove} prod={p}/>)
+                    cart.map((p,index)=><CartTable key={index} remove={remove} incr={incr} decr={decr} prod={p}/>)
                 }
                 </tbody>
             </StyledTable>

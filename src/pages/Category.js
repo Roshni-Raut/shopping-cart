@@ -4,7 +4,7 @@ import Filter from '../components/Filter'
 import { ProductGrid } from '../components/Product/ProductGrid'
 import data from '../data/products.json'
 import CatData from '../data/categories.json'
-import { FlexGrid, Home } from './styled'
+import { CategoryPage, FlexGrid, Home } from './styled'
 import { showCart, useSession } from '../misc/custom.hooks'
 import { CartB } from '../components/CardBtn.styled'
 import { Product } from '../misc/helper'
@@ -17,7 +17,6 @@ const Category = () => {
     const [cart,dispatch]=showCart() 
     const [qty,setQty]=useState(0)
     const [total,setTotal]=useState(0)
-
     useSession(catId)
 
     const addToCart=(e)=>{
@@ -39,7 +38,6 @@ const Category = () => {
         }
     }
     useEffect(()=>{
-        
             switch(filCon.length){
                 case 1: setProduct( filCon[0]==="price" ? 
                                         data.filter(d=> d.categoryId===catId && d.price<100):
@@ -60,29 +58,31 @@ const Category = () => {
                     return t+(p.price*val.qty)
                 },0)
             )
-        
-        
+                
     },[filCon,catId,cart])
     return (
-        <div >
-            <Link to="/"><Home>Home</Home></Link>
+        <div>
+
+        <CategoryPage>
+            <Home><Link to="/" className="link">Home</Link></Home>
             <CartB >
             <Link to="/cart" className="link"><span className="circle">{qty}</span> &nbsp; ${total}</Link> 
             </CartB>
-            <h1 align="center" color="blue">{category[0].name}</h1>
-            <h3 align="center">{category[0].description}</h3>
-                <Filter onFilter={onFilter} />
-                <FlexGrid >
-                    {product.length>0 && product.map(prod=> 
-                            <ProductGrid
-                            product={prod}
-                            key={prod.id}
-                            addToCart={addToCart}
-                            />
-                            )
-                        }
-                    {product.length===0 && <h2>no result found</h2>}
-                </FlexGrid>
+            <h1 >{category[0].name}</h1>
+            <h3 >{category[0].description}</h3>
+        </CategoryPage>
+            <Filter onFilter={onFilter} />
+            <FlexGrid >
+                {product.length>0 && product.map(prod=> 
+                        <ProductGrid
+                        product={prod}
+                        key={prod.id}
+                        addToCart={addToCart}
+                        />
+                        )
+                    }
+                {product.length===0 && <h2>no result found</h2>}
+            </FlexGrid>
         </div>
     )
 }
